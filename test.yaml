@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+swagger: '2.0'
 info:
   description: |
     Fast Healthcare Interoperability Resources (FHIR, pronounced "Fire") defines a set of "Resources" that represent granular clinical concepts. The resources can be managed in isolation, or aggregated into complex documents. Technically, FHIR is designed for the web; the resources are based on simple XML or JSON structures, with an http-based RESTful protocol where each resource has predictable URL. Where possible, open internet standards are used for data representation. 
@@ -11,42 +11,7 @@ basePath: /baseDstu2
 tags:
   - name: AllergyIntolerance
 definitions:
-
-  Resource2:
-    type: object
-    properties:
-      asdfasdf:
-        type: string
-        minLength: 1
-      asdfasdf2:
-        type: string
-        minLength: 1
-      asdfasdf3:
-        type: string
-        minLength: 1
-      asdfasdf4:
-        type: string
-        minLength: 1
-  Resource:
-    allOf: 
-      - $ref: '#/definitions/Resource2'
-    type: object
-    properties:
-      asdf:
-        type: string
-        minLength: 1
-      asdf2:
-        type: string
-        minLength: 1
-      asdf3:
-        type: string
-        minLength: 1
-      asdf4:
-        type: string
-        minLength: 1
   AllergyIntolerance:
-    allOf: 
-      - $ref: '#/definitions/Resource'
     description: ''
     type: object
     properties:
