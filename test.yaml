@@ -1,433 +1,679 @@
-swagger: '2.0'
-info:
-  description: |
-    Fast Healthcare Interoperability Resources (FHIR, pronounced "Fire") defines a set of "Resources" that represent granular clinical concepts. The resources can be managed in isolation, or aggregated into complex documents. Technically, FHIR is designed for the web; the resources are based on simple XML or JSON structures, with an http-based RESTful protocol where each resource has predictable URL. Where possible, open internet standards are used for data representation. 
-  title: Argonaut
-  version: unspecified
-host: fhirtest.uhn.ca
-schemes:
-  - http
-basePath: /baseDstu2
-tags:
-  - name: AllergyIntolerance
-definitions:
-  AllergyIntolerance:
-    description: ''
-    type: object
-    properties:
-      resourceType:
-        type: string
-        minLength: 1
-      id:
-        type: string
-        minLength: 1
-      text:
-        type: object
-        properties:
-          status:
-            type: string
-            minLength: 1
-          div:
-            type: string
-            minLength: 1
-        required:
-          - status
-          - div
-      identifier:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-            - system
-            - value
-          properties:
-            system:
-              type: string
-              minLength: 1
-            value:
-              type: string
-              minLength: 1
-      recordedDate:
-        type: string
-        minLength: 1
-      recorder:
-        type: object
-        properties:
-          reference:
-            type: string
-            minLength: 1
-        required:
-          - reference
-      patient:
-        type: object
-        properties:
-          reference:
-            type: string
-            minLength: 1
-        required:
-          - reference
-      substance:
-        type: object
-        properties:
-          coding:
-            type: array
-            uniqueItems: true
-            minItems: 1
-            items:
-              required:
-                - system
-                - code
-                - display
-              properties:
-                system:
-                  type: string
-                  minLength: 1
-                code:
-                  type: string
-                  minLength: 1
-                display:
-                  type: string
-                  minLength: 1
-        required:
-          - coding
-      status:
-        type: string
-        minLength: 1
-      criticality:
-        type: string
-        minLength: 1
-      type:
-        type: string
-        minLength: 1
-      category:
-        type: string
-        minLength: 1
-      lastOccurence:
-        type: string
-        minLength: 1
-      reaction:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-            - description
-            - onset
-            - severity
-          properties:
-            substance:
-              type: object
-              properties:
-                coding:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    required:
-                      - system
-                      - code
-                      - display
-                    properties:
-                      system:
-                        type: string
-                        minLength: 1
-                      code:
-                        type: string
-                        minLength: 1
-                      display:
-                        type: string
-                        minLength: 1
-              required:
-                - coding
-            manifestation:
-              type: array
-              uniqueItems: true
-              minItems: 1
-              items:
-                properties:
-                  coding:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                        - system
-                        - code
-                        - display
-                      properties:
-                        system:
-                          type: string
-                          minLength: 1
-                        code:
-                          type: string
-                          minLength: 1
-                        display:
-                          type: string
-                          minLength: 1
-            description:
-              type: string
-              minLength: 1
-            onset:
-              type: string
-              minLength: 1
-            severity:
-              type: string
-              minLength: 1
-    required:
-      - patient
-      - substance
-      - status
-  Patient:
-    description: ''
-    type: object
-    properties:
-      resourceType:
-        type: string
-        minLength: 1
-      id:
-        type: string
-        minLength: 1
-      text:
-        type: object
-        properties:
-          status:
-            type: string
-            minLength: 1
-          div:
-            type: string
-            minLength: 1
-        required:
-        - status
-        - div
-      identifier:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-          - use
-          - system
-          - value
-          properties:
-            use:
-              type: string
-              minLength: 1
-            type:
-              type: object
-              properties:
-                coding:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    required:
-                    - system
-                    - code
-                    properties:
-                      system:
-                        type: string
-                        minLength: 1
-                      code:
-                        type: string
-                        minLength: 1
-              required:
-              - coding
-            system:
-              type: string
-              minLength: 1
-            value:
-              type: string
-              minLength: 1
-      active:
-        type: boolean
-      name:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-          - family
-          - given
-          properties:
-            use:
-              type: string
-              minLength: 1
-            family:
-              type: array
-              items:
-                properties: {}
-            given:
-              type: array
-              items:
-                properties: {}
-      gender:
-        type: string
-        minLength: 1
-      photo:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-          - contentType
-          - data
-          properties:
-            contentType:
-              type: string
-              minLength: 1
-            data:
-              type: string
-              minLength: 1
-      contact:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          properties:
-            relationship:
-              type: array
-              uniqueItems: true
-              minItems: 1
-              items:
-                properties:
-                  coding:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                      - system
-                      - code
-                      properties:
-                        system:
-                          type: string
-                          minLength: 1
-                        code:
-                          type: string
-                          minLength: 1
-            organization:
-              type: object
-              properties:
-                reference:
-                  type: string
-                  minLength: 1
-                display:
-                  type: string
-                  minLength: 1
-              required:
-              - reference
-              - display
-      managingOrganization:
-        type: object
-        properties:
-          reference:
-            type: string
-            minLength: 1
-          display:
-            type: string
-            minLength: 1
-        required:
-        - reference
-        - display
-      link:
-        type: array
-        uniqueItems: true
-        minItems: 1
-        items:
-          required:
-          - type
-          properties:
-            other:
-              type: object
-              properties:
-                reference:
-                  type: string
-                  minLength: 1
-              required:
-              - reference
-            type:
-              type: string
-              minLength: 1
-    required:
-    - identifier
-    - name
-    - gender
-paths:
-  /AllergyIntolerance:
-    get:
-      tags:
-        - AllergyIntolerance
-      parameters:
-        - name: page
-          type: number
-          in: query
-          description: Indicates page number requested
-        - name: _count
-          type: number
-          in: query
-          description: Indicates maximum number of resources returned and implies page size
-        - name: patient
-          type: string
-          in: query
-      responses:
-        '200':
-          description: Success
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/AllergyIntolerance'
-  '/AllergyIntolerance/{id}':
-    parameters:
-      - in: path
-        required: true
-        name: id
-        type: string
-    get:
-      tags:
-        - AllergyIntolerance
-      parameters: []
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/AllergyIntolerance'
-  "/Patient":
-    get:
-      tags:
-      - Patient
-      parameters:
-        - name: page
-          type: number
-          in: query
-          description: Indicates page number requested
-        - name: _count
-          type: number
-          in: query
-          description: Indicates maximum number of resources returned and implies page size
-        - name: patient
-          type: string
-          in: query
-      responses:
-        '200':
-          description: Success
-          schema:
-            type: array
-            items:
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Fast Healthcare Interoperability Resources (FHIR, pronounced \"Fire\") defines a set of \"Resources\" that represent granular clinical concepts. The resources can be managed in isolation, or aggregated into complex documents. Technically, FHIR is designed for the web; the resources are based on simple XML or JSON structures, with an http-based RESTful protocol where each resource has predictable URL. Where possible, open internet standards are used for data representation. \n",
+    "title": "Argonaut",
+    "version": "unspecified"
+  },
+  "host": "fhirtest.uhn.ca",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/baseDstu2",
+  "tags": [
+    {
+      "name": "AllergyIntolerance"
+    }
+  ],
+  "definitions": {
+    "Resource2": {
+      "type": "object",
+      "properties": {
+        "asdfasdf": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdfasdf2": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdfasdf3": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdfasdf4": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Resource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource2"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "asdf": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdf2": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdf3": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asdf4": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "AllergyIntolerance": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "minLength": 1
+            },
+            "div": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "status",
+            "div"
+          ]
+        },
+        "identifier": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "system",
+              "value"
+            ],
+            "properties": {
+              "system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "recordedDate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recorder": {
+          "type": "object",
+          "properties": {
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reference"
+          ]
+        },
+        "patient": {
+          "type": "object",
+          "properties": {
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reference"
+          ]
+        },
+        "substance": {
+          "type": "object",
+          "properties": {
+            "coding": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+                "required": [
+                  "system",
+                  "code",
+                  "display"
+                ],
+                "properties": {
+                  "system": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "display": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "coding"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "criticality": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lastOccurence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reaction": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "description",
+              "onset",
+              "severity"
+            ],
+            "properties": {
+              "substance": {
+                "type": "object",
+                "properties": {
+                  "coding": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "required": [
+                        "system",
+                        "code",
+                        "display"
+                      ],
+                      "properties": {
+                        "system": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "code": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "display": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "coding"
+                ]
+              },
+              "manifestation": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "coding": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "system",
+                          "code",
+                          "display"
+                        ],
+                        "properties": {
+                          "system": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "code": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "display": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "onset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "severity": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "patient",
+        "substance",
+        "status"
+      ]
+    },
+    "Patient": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "minLength": 1
+            },
+            "div": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "status",
+            "div"
+          ]
+        },
+        "identifier": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "use",
+              "system",
+              "value"
+            ],
+            "properties": {
+              "use": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "object",
+                "properties": {
+                  "coding": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "required": [
+                        "system",
+                        "code"
+                      ],
+                      "properties": {
+                        "system": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "code": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "coding"
+                ]
+              },
+              "system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "family",
+              "given"
+            ],
+            "properties": {
+              "use": {
+                "type": "string",
+                "minLength": 1
+              },
+              "family": {
+                "type": "array",
+                "items": {
+                  "properties": {}
+                }
+              },
+              "given": {
+                "type": "array",
+                "items": {
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "gender": {
+          "type": "string",
+          "minLength": 1
+        },
+        "photo": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "contentType",
+              "data"
+            ],
+            "properties": {
+              "contentType": {
+                "type": "string",
+                "minLength": 1
+              },
+              "data": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "contact": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "properties": {
+              "relationship": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "coding": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "system",
+                          "code"
+                        ],
+                        "properties": {
+                          "system": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "code": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "display": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "reference",
+                  "display"
+                ]
+              }
+            }
+          }
+        },
+        "managingOrganization": {
+          "type": "object",
+          "properties": {
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "display": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "reference",
+            "display"
+          ]
+        },
+        "link": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "other": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "reference"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "identifier",
+        "name",
+        "gender"
+      ]
+    }
+  },
+  "paths": {
+    "/AllergyIntolerance": {
+      "get": {
+        "tags": [
+          "AllergyIntolerance"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "type": "number",
+            "in": "query",
+            "description": "Indicates page number requested"
+          },
+          {
+            "name": "_count",
+            "type": "number",
+            "in": "query",
+            "description": "Indicates maximum number of resources returned and implies page size"
+          },
+          {
+            "name": "patient",
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AllergyIntolerance"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AllergyIntolerance/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "required": true,
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "AllergyIntolerance"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AllergyIntolerance"
+            }
+          }
+        }
+      }
+    },
+    "/Patient": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "type": "number",
+            "in": "query",
+            "description": "Indicates page number requested"
+          },
+          {
+            "name": "_count",
+            "type": "number",
+            "in": "query",
+            "description": "Indicates maximum number of resources returned and implies page size"
+          },
+          {
+            "name": "patient",
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Patient"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Patient/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "required": true,
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
               "$ref": "#/definitions/Patient"
-  "/Patient/{id}":
-    parameters:
-    - in: path
-      required: true
-      name: id
-      type: string
-    get:
-      tags:
-      - Patient
-      parameters: []
-      responses:
-        '200':
-          description: Success
-          schema:
-            "$ref": "#/definitions/Patient"
-  
+            }
+          }
+        }
+      }
+    }
+  }
+}
